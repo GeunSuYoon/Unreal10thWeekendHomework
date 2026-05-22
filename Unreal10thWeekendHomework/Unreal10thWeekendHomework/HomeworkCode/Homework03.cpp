@@ -6,9 +6,9 @@
 enum ESlotSymbol
 {
 	SlotSymbolSeven		= 0,
-	SlotSymbolHeart		= 1,
-	SlotSymbolStar		= 2,
-	SlotSymbolSquare	= 3,
+	SlotSymbolJack		= 1,
+	SlotSymbolQueen		= 2,
+	SlotSymbolKing	= 3,
 };
 // 슬롯 결과 enum.
 enum ESlotMatch
@@ -27,7 +27,7 @@ const int	LuckySeven = 10000;
 // 슬롯 관련 선언부
 // 여길 바꾸면 enum도 바꿔줘야 한다!
 const int	SlotSymbolSize = 4;
-const char	SlotMachineSymbol[SlotSymbolSize] = { '7', '♥', '★', '■' };
+const char	SlotMachineSymbol[SlotSymbolSize] = { '7', 'J', 'Q', 'K' };
 // 슬롯 머신 심볼 개수
 const int	SlotMachineSize = 3;
 
@@ -58,6 +58,8 @@ void	Homework03_Run(void)
 	{
 		// 플레이어의 소지금액 알려주고, 최소 베팅 금액 ~ 플레이어 소지금액 사이로 베팅하도록 한다.
 		printf("현재 플레이어의 소지금액은 %d원 입니다.\n", PlayerCost);
+		printf("베팅 금액을 설정해주세요.\n베팅 금액은 %d원부터 %d원까지 입니다.\n", MinBettingCost, PlayerCost);
+		std::cin >> BettingCost;
 		while (BettingCost < 100 || BettingCost > PlayerCost)
 		{
 			std::cin.clear();
@@ -105,7 +107,9 @@ void	Homework03_Run(void)
 			break;
 		}
 		}
+		BettingCost = 0;
 	}
+	printf("소지 금액이 %d원 입니다.\n파산했습니다...\n", PlayerCost);
 }
 
 void	PrintSlotMachine(ESlotSymbol* SlotMachine)
@@ -119,6 +123,11 @@ void	PrintSlotMachine(ESlotSymbol* SlotMachine)
 	for (int SlotMachineCount = 0; SlotMachineCount < SlotMachineSize; SlotMachineCount++)
 	{
 		printf("| [%c] |", SlotMachineSymbol[SlotMachine[SlotMachineCount]]);
+	}
+	printf("\n");
+	for (int SlotMachineCount = 0; SlotMachineCount < SlotMachineSize; SlotMachineCount++)
+	{
+		printf("   -   ");
 	}
 	printf("\n");
 	printf("Slot Machine\n");
